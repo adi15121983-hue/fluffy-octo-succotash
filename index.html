@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Help Ahmed Leave Iraq</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f6f7f9;color:#18212f}
+.wrap{max-width:980px;margin:auto;padding:22px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:10px 0 28px}
+.logo{font-weight:800;font-size:20px}.badge{font-size:12px;background:#fff1df;color:#9a5b00;padding:7px 11px;border-radius:999px;font-weight:700}
+.hero{background:#fff;border:1px solid #e6e9ee;border-radius:24px;overflow:hidden;box-shadow:0 12px 40px #18212f10}
+.cover{height:250px;background:linear-gradient(135deg,#172a46,#426a8e 55%,#d6b27a);position:relative}
+.cover:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#0008,transparent 70%)}
+.covertext{position:absolute;z-index:2;bottom:25px;left:28px;color:white}.covertext small{opacity:.8}.covertext h1{margin:5px 0;font-size:clamp(28px,5vw,48px)}
+.content{padding:30px}.grid{display:grid;grid-template-columns:1fr 330px;gap:30px}
+h2{margin:0 0 10px;font-size:25px}.story{line-height:1.7;color:#596575}.stats{margin:24px 0}.amount{font-size:34px;font-weight:850}.goal{color:#697586}.bar{height:13px;background:#e8ebef;border-radius:20px;overflow:hidden;margin:12px 0}.fill{height:100%;width:0;background:#2f80ed;border-radius:20px;transition:width .5s}.percent{font-weight:750;color:#2f80ed}
+.card{border:1px solid #e2e6eb;border-radius:18px;padding:22px;position:sticky;top:20px;background:#fff}.donate{width:100%;border:0;border-radius:13px;padding:15px;background:#2f80ed;color:white;font-size:17px;font-weight:800;cursor:pointer}.donate:hover{filter:brightness(.94)}
+.meta{display:flex;justify-content:space-between;margin-top:18px;color:#687585;font-size:14px}.recent{margin-top:28px}.donor{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid #edf0f3}.donor:last-child{border:0}.name{font-weight:700}.time{font-size:12px;color:#8993a0}
+.notice{margin-top:25px;background:#fff8e8;border:1px solid #f4dfaa;color:#755719;border-radius:13px;padding:13px;font-size:13px}
+footer{text-align:center;color:#8b95a2;font-size:12px;padding:25px}
+.modal{position:fixed;inset:0;background:#07111bcc;display:none;align-items:center;justify-content:center;padding:20px;z-index:10}.modal.show{display:flex}.modalbox{width:min(460px,100%);background:#fff;border-radius:22px;padding:25px;box-shadow:0 25px 80px #0005}.close{float:right;border:0;background:#eef1f4;border-radius:50%;width:34px;height:34px;cursor:pointer}.range{width:100%;accent-color:#2f80ed}.value{font-size:42px;font-weight:850;text-align:center;margin:20px 0 5px}.hint{text-align:center;color:#7a8491;font-size:13px;margin-bottom:20px}.confirm{margin-top:20px}.disclaimer{font-size:11px;color:#8a929c;text-align:center;margin-top:12px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.card{position:static}.cover{height:220px}.content{padding:22px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><div class="logo">FundTogether</div><div class="badge">SIMULATION • NO REAL PAYMENTS</div></header>
+
+  <main class="hero">
+    <section class="cover">
+      <div class="covertext">
+        <small>A completely serious mission*</small>
+        <h1>Help Ahmed Leave Iraq</h1>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="grid">
+        <div>
+          <h2>One man. One suitcase. One questionable plan.</h2>
+          <p class="story">
+            Ahmed has decided that it is finally time to leave Iraq and begin a new chapter somewhere far, far away.
+            Unfortunately, international travel, plane tickets and the general cost of escaping your comfort zone are not free.
+            So this campaign has been launched to fund the great escape.
+          </p>
+          <p class="story"><strong>Every fictional dollar brings Ahmed one step closer to the airport.</strong></p>
+
+          <div class="stats">
+            <div><span class="amount" id="raised">$6,742</span> <span class="goal">raised of $10,000 goal</span></div>
+            <div class="bar"><div class="fill" id="fill"></div></div>
+            <span class="percent" id="percent">67.42%</span>
+          </div>
+
+          <div class="recent">
+            <h2>Recent supporters</h2>
+            <div id="donors"></div>
+          </div>
+
+          <div class="notice">
+            <strong>Important:</strong> This is an interactive parody/simulation. Donations do not move money,
+            charge cards, or connect to any financial account.
+          </div>
+        </div>
+
+        <aside class="card">
+          <h2>Help fund the escape</h2>
+          <p class="story">Choose any amount. Your fictional contribution will immediately update this campaign.</p>
+          <button class="donate" onclick="openModal()">Donate</button>
+          <div class="meta"><span id="donorCount">143 donors</span><span>Goal $10,000</span></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <footer>*Mostly serious. Completely fictional payments.</footer>
+</div>
+
+<div class="modal" id="modal" onclick="outside(event)">
+  <div class="modalbox">
+    <button class="close" onclick="closeModal()">×</button>
+    <h2>Choose your donation</h2>
+    <div class="value" id="value">$37</div>
+    <div class="hint">Drag the slider to choose an amount</div>
+    <input class="range" id="range" type="range" min="1" max="500" value="37" step="1" oninput="updateValue()">
+    <button class="donate confirm" id="confirm" onclick="donate()">Donate $37</button>
+    <div class="disclaimer">No payment will be processed. This only updates the demo campaign.</div>
+  </div>
+</div>
+
+<script>
+const GOAL=10000;
+let raised=6742, donors=143;
+let list=[
+ ["Anonymous Traveler","$100","2 min ago"],
+ ["A Concerned Friend","$25","8 min ago"],
+ ["Someone Who Believes","$50","17 min ago"],
+ ["Anonymous","$10","31 min ago"],
+ ["The Airport Committee","$75","1 hr ago"]
+];
+
+const money=n=>"$"+Math.round(n).toLocaleString();
+function render(){
+  document.getElementById("raised").textContent=money(raised);
+  document.getElementById("donorCount").textContent=donors+" donors";
+  const pct=Math.min(100,raised/GOAL*100);
+  document.getElementById("fill").style.width=pct+"%";
+  document.getElementById("percent").textContent=pct.toFixed(2)+"%";
+  document.getElementById("donors").innerHTML=list.slice(0,8).map(x=>
+    `<div class="donor"><div><div class="name">${escapeHtml(x[0])}</div><div class="time">${x[2]}</div></div><strong>${x[1]}</strong></div>`
+  ).join("");
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
+function openModal(){document.getElementById("modal").classList.add("show");updateValue();}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+function outside(e){if(e.target.id==="modal")closeModal()}
+function updateValue(){
+ const v=+document.getElementById("range").value;
+ document.getElementById("value").textContent=money(v);
+ document.getElementById("confirm").textContent="Donate "+money(v);
+}
+function donate(){
+ const v=+document.getElementById("range").value;
+ raised+=v; donors++;
+ list.unshift(["Anonymous Supporter",money(v),"just now"]);
+ render(); closeModal();
+}
+render();
+</script>
+</body>
+</html>
